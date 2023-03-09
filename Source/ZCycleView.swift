@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public protocol ZCycleViewProtocol: class {
+@objc public protocol ZCycleViewProtocol: AnyObject {
     /// 注册cell，[重用标志符：cell类]
     @objc func cycleViewRegisterCellClasses() -> [String: AnyClass]
     /// cell赋值
@@ -96,13 +96,13 @@ public class ZCycleView: UIView {
     /// 刷新数据
     public func reloadItemsCount(_ count: Int) {
         cancelTimer()
-        if isAutomatic { startTimer() }
         realItemsCount = count
         placeholder.isHidden = realItemsCount != 0
         setItemsCount()
         dealFirstPage()
         pageControl.numberOfPages = realItemsCount
         pageControl.currentPage = getCurrentIndex() % realItemsCount
+        if isAutomatic { startTimer() }
     }
     
     /// 滚动到下一页
@@ -111,7 +111,7 @@ public class ZCycleView: UIView {
     }
     
     func setItemsCount() {
-        itemsCount = realItemsCount <= 1 || !isInfinite ? realItemsCount : realItemsCount * 200
+        itemsCount = realItemsCount <= 1 || !isInfinite ? realItemsCount : realItemsCount * 10000
         collectionView.reloadData()
         collectionView.setContentOffset(.zero, animated: true)
     }
@@ -314,7 +314,7 @@ extension ZCycleView {
 // MARK: - 定时器操作
 
 extension ZCycleView {
-    private func startTimer() {
+    public func startTimer() {
         if !isAutomatic { return }
         if itemsCount <= 1 { return }
         cancelTimer()
@@ -322,7 +322,7 @@ extension ZCycleView {
         RunLoop.main.add(timer!, forMode: RunLoop.Mode.common)
     }
     
-    private func cancelTimer() {
+    public func cancelTimer() {
         timer?.invalidate()
         timer = nil
     }

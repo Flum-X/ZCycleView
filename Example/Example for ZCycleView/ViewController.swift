@@ -31,13 +31,12 @@ class ViewController: UIViewController {
         cycleView1.placeholderImage = #imageLiteral(resourceName: "placeholder")
         cycleView1.scrollDirection = .horizontal
         cycleView1.delegate = self
-        cycleView1.reloadItemsCount(images.count)
-        cycleView1.itemZoomScale = 1.2
+//        cycleView1.itemZoomScale = 1.2
         cycleView1.itemSpacing = 10
         cycleView1.initialIndex = 1
-        cycleView1.isAutomatic = false
-//        cycleView1.isInfinite = false
-        cycleView1.itemSize = CGSize(width: width - 150, height: (width - 150) / 2.3333)
+        cycleView1.isAutomatic = true
+        cycleView1.itemSize = CGSize(width: width - 20, height: (width - 150) / 2.3333)
+        cycleView1.reloadItemsCount(images.count)
         return cycleView1
     }()
 
