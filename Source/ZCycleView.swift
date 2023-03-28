@@ -101,7 +101,8 @@ public class ZCycleView: UIView {
         setItemsCount()
         dealFirstPage()
         pageControl.numberOfPages = realItemsCount
-        pageControl.currentPage = getCurrentIndex() % realItemsCount
+        pageControl.currentPage = realItemsCount == 0 ? realItemsCount
+        : getCurrentIndex() % realItemsCount
         if isAutomatic { startTimer() }
     }
     

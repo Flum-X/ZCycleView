@@ -34,7 +34,7 @@ class ViewController: UIViewController {
 //        cycleView1.itemZoomScale = 1.2
         cycleView1.itemSpacing = 10
         cycleView1.initialIndex = 1
-        cycleView1.isAutomatic = true
+        cycleView1.isAutomatic = false
         cycleView1.itemSize = CGSize(width: width - 20, height: (width - 150) / 2.3333)
         cycleView1.reloadItemsCount(images.count)
         return cycleView1
